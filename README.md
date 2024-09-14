@@ -1,27 +1,37 @@
-# Bookshop
+# Bookshop (angular version 17.3.9.)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.9.
+- generate angular project: `ng new your-project-name --no-standalone`
+- create component        : `ng g c component-name`
+- add bootstrap           : `ng add @ng-bootstrap/ng-bootstrap`
+- run server              : `ng serve`
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Dans agular, il y a deux concept à comprendre:
+- les 3 types de liaisons des données (Data Binding)
+- La communication entre les composants
 
-## Code scaffolding
+## Les 03 types de Data Binding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![sans_secu](captures/1.PNG)
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+![sans_secu](captures/type1.PNG)
 
-## Running unit tests
+![sans_secu](captures/exemple1.PNG)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+![sans_secu](captures/type2.PNG)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+![sans_secu](captures/exemple2.PNG)
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![sans_secu](captures/type3.PNG)
+
+![sans_secu](captures/exemple3.PNG)
+
+
+## La communication entre les composants
+
+1. Parent to Child Communication
+La communication du parent vers l'enfant se fait en passant des données du composant parent au composant enfant via des propriétés d'entrée (input properties).
+
