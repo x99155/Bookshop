@@ -56,4 +56,9 @@ export class LivreService { // c'est cette classe service qui va se connecte au 
     );
   }
 
+  AjouterLivre(livre:Ilivres)
+   {
+     return this.http.post('api/livres', livre);
+   }
+
 }

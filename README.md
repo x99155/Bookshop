@@ -137,3 +137,8 @@ Au lieu de souscrire manuellement à un Observable dans le composant et de stock
 
 ![sans_secu](captures/bookdetail.PNG)
 
+![sans_secu](captures/add.PNG)
+
+![sans_secu](captures/add1.PNG)
+
+![sans_secu](captures/add2.PNG)
