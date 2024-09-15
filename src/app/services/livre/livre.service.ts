@@ -1,87 +1,59 @@
 import { Injectable } from '@angular/core';
 import { Ilivres } from '../../models/livre.model';
+import { map, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LivreService {
+export class LivreService { // c'est cette classe service qui va se connecte au backend
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
-  getAllLivre(): Ilivres[] {
-    return [
-      {
-        id: 1,
-        name: "Big Data For Dummies",
-        imageUrl: "https://images-na.ssl-images-amazon.com/images/I/51p6wBow%2B3L._SX389_BO1,204,203,200_.jpg",
-        shortDescription: "Big data management is one of the major challenges facing business, industry, and not-for-profit organizations",
-        price: 98,
-        category: "Big data",
-        stars: 3
-      },
-      {
-        id: 2,
-        name: "Big Data",
-        imageUrl: "https://images-na.ssl-images-amazon.com/images/I/41JjodHnKHL._SX331_BO1,204,203,200_.jpg",
-        shortDescription: "Bernard Marr’s Data Strategy is a must-have guide to creating a robust data strategy",
-        price: 120,
-        category: "Big data",
-        stars: 3.5
-      },
-      {
-        id: 3,
-        name: "Database Engineering",
-        imageUrl: "https://images-na.ssl-images-amazon.com/images/I/51UvR3a63OL._SX379_BO1,204,203,200_.jpg",
-        shortDescription: "This book has been an evolving dream of ours for about five years. Laine came to the DBA role without any formal technical training.",
-        price: 66,
-        category: "Database",
-        stars: 5
-      },
-      {
-        id: 4,
-        name: "Data-Intensive",
-        imageUrl: "https://images-na.ssl-images-amazon.com/images/I/51gP9mXEqWL._SX379_BO1,204,203,200_.jpg",
-        shortDescription: "The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
-        price: 66,
-        category: "Database",
-        stars: 4.2
-      },
-      {
-        id: 5,
-        name: "Angular",
-        imageUrl: "https://images-na.ssl-images-amazon.com/images/I/51gP9mXEqWL._SX379_BO1,204,203,200_.jpg",
-        shortDescription: "The Big Ideas Behind Reliable, Scalable, and Maintainable Systems",
-        price: 66,
-        category: "Front-End",
-        stars: 3.1
-      },
-      {
-        id: 6,
-        name: "Learning React",
-        imageUrl: "https://images-eu.ssl-images-amazon.com/images/I/51Q43WRXJzL.jpg",
-        shortDescription: "Developed by Facebook, and used by companies including Netflix, Walmart, and The New York Times for large parts of their web interfaces",
-        price: 89,
-        category: "Front-End",
-        stars: 4.5
-      },
-      {
-        id: 7,
-        name: "Pro C# 7",
-        imageUrl: "https://images-na.ssl-images-amazon.com/images/I/413Z89zzezL._SX348_BO1,204,203,200_.jpg",
-        shortDescription: "Dive in and discover why Pro C# has been a favorite of C# developers worldwide for over 15 years",
-        price: 55.60,
-        category: "Back-End",
-        stars: 2.6
-      },
-      {
-        id: 8,
-        name: "Learning Node.js",
-        imageUrl: "https://images-na.ssl-images-amazon.com/images/I/41NGBmeH1uL._SX403_BO1,204,203,200_.jpg",
-        shortDescription: "Learning Node.js Development: Learn the fundamentals of Node.js, and deploy and test Node.js applications on the web",
-        price: 98,
-        category: "Back-End",
-        stars: 4.6
-      }
-    ];
+    /**
+   * Récupère tous les livres depuis la base de données.
+   * 
+   * Cette méthode effectue une requête HTTP GET pour récupérer
+   * un tableau d'objets `Ilivres` à partir de l'API.
+   * 
+   * @returns Un Observable contenant un flux de données sous la forme d'un tableau de `Ilivres`.
+   */
+  getAllLivre(): Observable<Ilivres[]> {
+    // Effectue une requête HTTP GET pour obtenir les livres depuis l'API ('api/livres').
+    return this.http.get<Ilivres[]>('api/livres').pipe(
+      // Le pipe permet de transformer ou manipuler les données de l'Observable.
+      map(livre => livre) // Ici, map est utilisé pour simplement retourner les données telles quelles.
+    );
   }
+
+  /**
+   * Récupère les livres filtrés par catégorie.
+   * 
+   * Cette méthode utilise la méthode `getAllLivre()` pour récupérer tous les livres,
+   * puis filtre le tableau pour ne conserver que les livres appartenant à la catégorie spécifiée.
+   * 
+   * @param category - Le nom de la catégorie pour filtrer les livres.
+   * @returns Un Observable contenant un tableau de `Ilivres` filtré par catégorie.
+   */
+  getLivreByCategory(category: string): Observable<Ilivres[]> {
+    // On récupère tous les livres via `getAllLivre()` et on applique un filtre sur la catégorie.
+    return this.getAllLivre().pipe(
+      // Utilise map pour transformer le flux de données en ne gardant que les livres correspondant à la catégorie spécifiée.
+      map(x => x.filter(p => p.category == category)) // Filtre les livres selon leur catégorie.
+    );
+  }
+
+  getLivreById(id: number): Observable<Ilivres> {
+
+    // return this.getAllLivre().pipe(
+    //   map(x => x.find(p => p.id == id))
+    // );
+
+    return this.getAllLivre().pipe(
+      map( livres => {
+        return livres.find(p => p.id == id) as Ilivres
+      })
+    );
+  }
+
 }
