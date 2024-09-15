@@ -1,46 +1,50 @@
-<div class="card">
-    <div class="card-header" *ngIf="livres.length > 0">
-        <h1>{{title}}</h1>
-    </div>
-    
-    <div class="row">
-        <div class="col-3">
-            <select [(ngModel)]="categoryId" (change)="changeCategory()">
-              <option value="all">Trier</option>
-              <option *ngFor="let category of listCategories" [value]="category">
-                {{ category }}
-              </option>
-            </select>
+<div class="m-5">
+    <div class="card">
+        <div class="card-header" *ngIf="livres.length > 0">
+            <h3>{{title}}</h3>
         </div>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive" *ngIf="affichage">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nom</th>
-                        <th>Aperçu</th>
-                        <th>Description</th>
-                        <th>Prix</th>
-                        <th>Catégorie</th>
-                        <th>Notes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let livre of livres">
-                        <td>{{livre.id}}</td>
-                        <td>{{livre.name}}</td>
-                        <td>
-                            <img [src]="livre.imageUrl" alt="" [width]="widthImg" [height]="heightImg">
-                        </td>
-                        <td>{{livre.shortDescription}}</td>
-                        <td>{{livre.price | currency: 'EUR':true}}</td>
-                        <td>{{livre.category | uppercase}}</td>
-                        <td><app-etoile [rate]="livre.stars" (notify)="onNotify($event)"></app-etoile></td>
-                    </tr>
-                </tbody>
-            </table>
+        
+        <div class="row m-3">
+            <div class="col-3">
+                <select [(ngModel)]="categoryId" (change)="changeCategory()">
+                <option value="all">Trier</option>
+                <option *ngFor="let category of listCategories" [value]="category">
+                    {{ category }}
+                </option>
+                </select>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive" *ngIf="affichage">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nom</th>
+                            <th>Aperçu</th>
+                            <th>Description</th>
+                            <th>Prix</th>
+                            <th>Catégorie</th>
+                            <th>Notes</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let livre of livres">
+                            <td>{{livre.id}}</td>
+                            <td>{{livre.name}}</td>
+                            <td>
+                                <img [src]="livre.imageUrl" alt="" [width]="widthImg" [height]="heightImg">
+                            </td>
+                            <td>{{livre.shortDescription}}</td>
+                            <td>{{livre.price | currency: 'EUR':true}}</td>
+                            <td>{{livre.category | uppercase}}</td>
+                            <td><app-etoile [rate]="livre.stars" (notify)="onNotify($event)"></app-etoile></td>
+                            <td><a class="btn btn-info" [routerLink]="['/livre', livre.id]">Détails</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
