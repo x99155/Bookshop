@@ -122,3 +122,18 @@ Au lieu de souscrire manuellement à un Observable dans le composant et de stock
 
 ![sans_secu](captures/pipe4.PNG)
 
+
+## Les formulaires
+
+
+
+## Démo
+
+![sans_secu](captures/home.PNG)
+
+![sans_secu](captures/book.PNG)
+
+![sans_secu](captures/bookby.PNG)
+
+![sans_secu](captures/bookdetail.PNG)
+

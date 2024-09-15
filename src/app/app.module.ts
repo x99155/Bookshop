@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListLivresComponent } from './list-livres/list-livres.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EtoileComponent } from './etoile/etoile.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './home/home.component';
@@ -13,6 +13,7 @@ import { DetailsLivreComponent } from './details-livre/details-livre.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemHeroService } from './backend/backend';
+import { CreateLivreComponent } from './create-livre/create-livre.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { InMemHeroService } from './backend/backend';
     EtoileComponent,
     HomeComponent,
     NotFoundComponent,
-    DetailsLivreComponent
+    DetailsLivreComponent,
+    CreateLivreComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import { InMemHeroService } from './backend/backend';
     FormsModule,
     NgbModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemHeroService)
+    HttpClientInMemoryWebApiModule.forRoot(InMemHeroService),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
